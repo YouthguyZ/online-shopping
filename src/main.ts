@@ -5,4 +5,7 @@ import 'normalize.css'
 // 导入公共样式
 import '@/assets/styles/common.less'
 
-createApp(App).mount('#app')
+import router from '@/router/index'
+
+
+createApp(App).use(router).mount('#app')
