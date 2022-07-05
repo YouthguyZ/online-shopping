@@ -1,20 +1,16 @@
 <template>
    <ul class="app-header-nav">
       <li class="home"><RouterLink to="/">首页</RouterLink></li>
-      <li><a href="#">美食</a></li>
-      <li><a href="#">餐厨</a></li>
-      <li><a href="#">艺术</a></li>
-      <li><a href="#">电器</a></li>
-      <li><a href="#">居家</a></li>
-      <li><a href="#">洗护</a></li>
-      <li><a href="#">孕婴</a></li>
-      <li><a href="#">服装</a></li>
-      <li><a href="#">杂货</a></li>
+      <li v-for="item in category.list" :key="item.id" ><router-link to="/">{{item.name}}</router-link></li>
+      
     </ul>
 </template>
 
 <script setup lang="ts" name="AppHeaderNav">
-
+  import useStore from '@/store';
+  const {category}=useStore()
+  // 获取全部分类列表
+  category.getAllCategory()
 </script>
 
 <style scoped lang="less">
