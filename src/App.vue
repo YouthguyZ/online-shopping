@@ -15,8 +15,9 @@ axios.get('/home/index').then(res=>console.log(res))
 
 <style scoped lang="less">
 // 必须导入variables.less
-@import '@/assets/styles/variable.less';
-@import '@/assets/styles/mixins.less';
+// 配置vite.config 默认导入
+// @import '@/assets/styles/variable.less';
+// @import '@/assets/styles/mixins.less';
 h1 {
   background-color: @xtxColor;
   .hoverShadow();
