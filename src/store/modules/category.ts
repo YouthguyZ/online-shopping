@@ -4,6 +4,14 @@ import request from '@/utils/request'
 // 导入类型声明
 import { ApiRes, categoryItem } from '@/types'
 
+// 优化首页加载
+import { topCategory } from '../contansts'
+const defaultCategory=topCategory.map(item=>{
+  return {
+    name:item
+  }
+})
+
 // 接口
 // interface categoryItem{
 //   id:string
@@ -19,7 +27,7 @@ export default defineStore('category',{
   state:()=>{
     return {
       // 类型断言
-      list:[] as categoryItem[]
+      list:defaultCategory as categoryItem[]
     }
   },
   actions:{

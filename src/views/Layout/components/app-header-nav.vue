@@ -3,7 +3,7 @@
       <li class="home"><RouterLink to="/">首页</RouterLink></li>
       <li v-for="item in category.list" :key="item.id" ><router-link to="/">{{item.name}}</router-link>
        <!-- 新增++++++++ -->
-      <div class="layer">
+      <div v-if="item.children" class="layer">
         <ul>
           <li v-for="sub in item.children" :key="sub.id">
             <a href="#">
