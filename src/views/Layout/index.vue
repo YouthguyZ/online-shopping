@@ -1,16 +1,22 @@
 <template>
   <AppTopnav/>
-  <div>分类导航栏</div>
-  <div>二级路口出口</div>
-  <div>底部区域</div>
+  <AppHeader/>
+   <main class="app-body">
+    <!-- 路由出口 -->
+  </main>
+  <AppFooter/>
 
 </template>
 
 <script name="Layout" setup lang="ts">
 import AppTopnav from './components/app-topnav.vue';
+import AppHeader from './components/app-header.vue';
+import AppFooter from './components/app-footer.vue';
 
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.app-body {
+  min-height: 600px;
+}
 </style>
