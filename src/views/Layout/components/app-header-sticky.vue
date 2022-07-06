@@ -1,16 +1,18 @@
 <script lang="ts" setup name="AppHeaderSticky">
 import { ref } from 'vue';
 import AppHeaderNav from './app-header-nav.vue'
-
-const y=ref(0)
+// vueuse 库
+import { useWindowScroll } from '@vueuse/core'
+// 控制是否显示吸顶组件
+const { y } = useWindowScroll()
+// const y=ref(0)
 
 // 监听滚动事件
-window.addEventListener('scroll',()=>{
-  const scrolltop=document.documentElement.scrollTop||document.body.scrollTop
-   y.value=scrolltop 
-   console.log(y);
-   
-})
+// window.addEventListener('scroll',()=>{
+//   const scrolltop=document.documentElement.scrollTop||document.body.scrollTop
+//    y.value=scrolltop 
+//    console.log(y);
+// })
 </script>
 
 <template>
