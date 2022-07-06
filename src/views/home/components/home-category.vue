@@ -1,6 +1,7 @@
 <script lang="ts" setup name="HomeCategory">
 import useStore from '@/store';
 import { computed, ref } from 'vue';
+import Skeleton from '@/component/skeleton/index.vue';
 // pinia
 const {category}=useStore()
 // 当前分类 id
@@ -26,8 +27,13 @@ const hMouseenter=(id:string)=>{
       @mouseenter="hMouseenter(item.id)"
       >
         <RouterLink :to="`/category/${item.id}}`">{{item.name}}</RouterLink>
-        <RouterLink v-for="sub in item.children?.slice(0,2)" :key="sub.id" :to="`/category/sub/${sub.id}}}`">{{sub.name}}</RouterLink>
-        
+        <template v-if="item.children">
+          <RouterLink v-for="sub in item.children?.slice(0,2)" :key="sub.id" :to="`/category/sub/${sub.id}}}`">{{sub.name}}</RouterLink>
+        </template>
+        <template v-else>
+          <Skeleton fade animated :width="70" :height="25" bg="rgba(255,255,255,0.2)"/>
+          <Skeleton fade style="margin-left: 5px;" animated :width="40" :height="25" bg="rgba(255,255,255,0.2)"/>
+        </template>
       </li>
     </ul>
     <!-- 弹层 -->
