@@ -5,6 +5,8 @@ export interface categoryItem{
   name:string
   picture:string
   children:categoryItem[]
+  // 添加 open 属性
+  open:boolean
 }
 export interface ApiRes<t>{
   code:string

@@ -34,8 +34,30 @@ export default defineStore('category',{
    async getAllCategory(){
       const res=await request.get<ApiRes<categoryItem[]>>('/home/category/head')
       console.log(res.data.result);
+      // 给 list 增加 open 属性
+      res.data.result.forEach(item=>item.open=false)
       this.list=res.data.result
       
+    },
+    show(id:string){
+      // 找到相同 id 点击时 或 鼠标移动到时
+      const item=this.list.find(item=>item.id===id)
+      // if(item){
+      //   item.open=true
+      // }
+
+      // 第二种 使用有风险
+      item!.open=true
+
+    },
+    hide(id:string){
+      const item=this.list.find(item=>item.id===id)
+      // if(item){
+      //   item.open=true
+      // }
+
+      // 第二种 使用有风险
+      item!.open=false
     }
   }
 })
