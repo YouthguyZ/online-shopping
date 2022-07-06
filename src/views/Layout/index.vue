@@ -2,7 +2,8 @@
   <AppTopnav/>
   <AppHeader/>
    <main class="app-body">
-    <!-- 路由出口 -->
+    <!-- 路由出口 一二级分类-->
+    <router-view></router-view>
   </main>
   <AppFooter/>
 
