@@ -11,6 +11,11 @@ import router from '@/router/index'
 // 导入pinia对象并使用
 import {createPinia} from 'pinia'
 
+// 注册全局组件
+import XtxUI from '@/component'
+// const app = createApp(App)
+// app.use(XtxUI)
 
 
-createApp(App).use(router).use(createPinia()).mount('#app')
+
+createApp(App).use(router).use(createPinia()).use(XtxUI).mount('#app')
