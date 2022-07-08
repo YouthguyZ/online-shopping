@@ -3,6 +3,7 @@ import HomeBanner from './components/home-banner.vue'
 import HomeCategory from './components/home-category.vue'
 import HomePannel from './components/home-pannel.vue'
 import HomeNew from './components/home-new.vue';
+import HomeHot from './components/home-hot.vue';
 
 </script>
 
@@ -17,12 +18,9 @@ import HomeNew from './components/home-new.vue';
       </div>
     </div>
     <!-- !新鲜好物 -->
-      <HomeNew/>
+    <HomeNew/>
     <!-- !人气推荐 -->
-    <HomePannel title="人气推荐" subTitle="人气爆款 不容错过">
-      <p>人气推荐图片</p>
-      <p>人气推荐图片</p>
-    </HomePannel>
+    <HomeHot/>
   </div>
 </template>
 
