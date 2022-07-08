@@ -7,8 +7,9 @@
     <ul class="goods-list">
       <li v-for="item in home.NewList" :key="item.id">
         <RouterLink to="/">
+          <!-- 图片懒加载 ：src => v-lazy -->
           <img
-            :src="item.picture"
+            v-lazy="item.picture"
             alt=""
           />
           <p class="name ellipsis">{{item.name}}</p>
