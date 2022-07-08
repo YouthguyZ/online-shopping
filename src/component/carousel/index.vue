@@ -1,47 +1,66 @@
 <script lang="ts" setup name="XtxCarousel">
-defineProps()
+
+
+// 子组件接收数据
+// Vue3 一般接收方法
+// defineProps({
+//   slides:{
+//     type:Array,
+//     require:true
+//   }
+
+import { HomeItem } from '@/types';
+import { ref } from 'vue';
+
+// })
+const props=defineProps<{
+  // slides:{
+  //   type:Array,
+  //   require:boolean
+  // }[]
+  slides:HomeItem[]
+}>()
+
+// 淡入淡出的轮播图是轮播图界的青铜
+// 定义一个当前轮播图的索引
+const active = ref(0)
+// 定义点击事件
+const prev=()=>{
+  active.value--
+  if(active.value<0){
+    active.value=props.slides.length-1
+  }
+}
+const next=()=>{
+  active.value++
+  if(active.value>=props.slides.length){
+    active.value=0
+  }
+}
 </script>
 
 <template>
   <div class="xtx-carousel">
     <ul class="carousel-body">
-      <li class="carousel-item fade">
+      <li v-for="(item,index) in slides" :key="item.id" :class="{ fade: active === index }" class="carousel-item">
         <RouterLink to="/">
           <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
+            :src="item.imgUrl"
             alt=""
           />
         </RouterLink>
       </li>
-      <li class="carousel-item">
-        <RouterLink to="/">
-          <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
-            alt=""
-          />
-        </RouterLink>
-      </li>
-      <li class="carousel-item">
-        <RouterLink to="/">
-          <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
-            alt=""
-          />
-        </RouterLink>
-      </li>
+     
     </ul>
-    <a href="javascript:;" class="carousel-btn prev"
+    <a href="javascript:;" class="carousel-btn prev" @click="prev"
       ><i class="iconfont icon-angle-left"></i
     ></a>
-    <a href="javascript:;" class="carousel-btn next"
+    <a href="javascript:;" class="carousel-btn next" @click="next"
       ><i class="iconfont icon-angle-right"></i
     ></a>
     <div class="carousel-indicator">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span v-for="(item,index) in slides" :key="item.id"   :class="{active:active===index}"></span>
+    
     </div>
   </div>
 </template>
