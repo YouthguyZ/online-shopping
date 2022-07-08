@@ -13,12 +13,20 @@ import { HomeItem } from '@/types';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 // })
-const props=defineProps<{
+// 默认赋值属于实验性语法，可以尝鲜，需要再 vite.config 里配置 reactivityTransform 属性
+// 在内部帮你把每个结构的属性都做了响应式处理
+const { slides,
+        autoPlay=true,
+        duration=3000
+}=defineProps<{
   // slides:{
   //   type:Array,
   //   require:boolean
   // }[]
-  slides:HomeItem[]
+  slides:HomeItem[],
+  // 小写
+  autoPlay?:boolean,
+  duration?:number
 }>()
 
 // 淡入淡出的轮播图是轮播图界的青铜
@@ -28,12 +36,12 @@ const active = ref(0)
 const prev=()=>{
   active.value--
   if(active.value<0){
-    active.value=props.slides.length-1
+    active.value=slides.length-1
   }
 }
 const next=()=>{
   active.value++
-  if(active.value>=props.slides.length){
+  if(active.value>=slides.length){
     active.value=0
   }
 }
@@ -47,9 +55,11 @@ const stop = () => {
 // 鼠标离开轮播区域重新开始自动轮播
 const start = () => {
   timerId = window.setInterval(() => {
+    // 如果没有自动播放就 return 不执行
+    if(!autoPlay)return
     next()
     // console.log('正在滚动中...')
-  }, 2000)
+  }, duration)
 }
 
 // 组件挂载时开始定时器
@@ -83,7 +93,11 @@ onUnmounted(() => {
       ><i class="iconfont icon-angle-right"></i
     ></a>
     <div class="carousel-indicator">
-      <span v-for="(item,index) in slides" :key="item.id"   :class="{active:active===index}"></span>
+      <span v-for="(item,index) in slides"
+      :key="item.id"  
+      :class="{active:active===index}"
+      @mouseenter="active=index"
+      ></span>
     
     </div>
   </div>
