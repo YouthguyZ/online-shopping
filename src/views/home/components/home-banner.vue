@@ -1,4 +1,9 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useStore from '@/store';
+const {home}=useStore()
+// 调用 api 获取轮播图数据
+home.getBannerList()
+</script>
 <template>
   <div class="home-banner">
     <!-- 轮播图 -->

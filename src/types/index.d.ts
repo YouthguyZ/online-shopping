@@ -24,3 +24,11 @@ interface GoodsItem {
   discount?: number;
   orderNum?: number;
 }
+
+
+export interface HomeItem {
+  id: string;
+  imgUrl: string;
+  hrefUrl: string;
+  type: string;
+}
