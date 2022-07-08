@@ -10,7 +10,7 @@
 //   }
 
 import { HomeItem } from '@/types';
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 // })
 const props=defineProps<{
@@ -37,10 +37,34 @@ const next=()=>{
     active.value=0
   }
 }
+let timerId = -1
+
+// 鼠标进入轮播区域停止自动轮播
+const stop = () => {
+  clearInterval(timerId)
+}
+
+// 鼠标离开轮播区域重新开始自动轮播
+const start = () => {
+  timerId = window.setInterval(() => {
+    next()
+    // console.log('正在滚动中...')
+  }, 2000)
+}
+
+// 组件挂载时开始定时器
+onMounted(() => {
+  start()
+})
+
+// 组件销毁时清除定时器
+onUnmounted(() => {
+  stop()
+})
 </script>
 
 <template>
-  <div class="xtx-carousel">
+  <div class="xtx-carousel" @mouseenter="stop" @mouseleave="start">
     <ul class="carousel-body">
       <li v-for="(item,index) in slides" :key="item.id" :class="{ fade: active === index }" class="carousel-item">
         <RouterLink to="/">
