@@ -59,7 +59,7 @@ export type BrandItem = {
 }
 
 
-interface ProductItem {
+export interface ProductItem {
   id: string;
   name: string;
   picture: string;
@@ -83,4 +83,21 @@ interface Child {
   name: string;
   layer: number;
   parent?: any;
+}
+
+interface SpecialItem {
+  creator: string;
+  isDelete: number;
+  createTime: string;
+  updateTime: string;
+  id: string;
+  classificationId: string;
+  title: string;
+  summary: string;
+  lowestPrice: number;
+  cover: string;
+  detailsUrl: string;
+  collectNum: number;
+  viewNum: number;
+  replyNum: number;
 }

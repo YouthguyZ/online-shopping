@@ -9,6 +9,7 @@ import HomeHot from './components/home-hot.vue';
 import useStore from '@/store';
 import HomeBrand from './components/home-brand.vue';
 import HomeProduct from './components/home-product.vue';
+import HomeSpecial from './components/home-special.vue';
   const {category}=useStore()
   // 获取全部分类列表
   category.getAllCategory()
@@ -33,6 +34,8 @@ import HomeProduct from './components/home-product.vue';
     <HomeBrand/>
     <!-- !商品区别 -->
     <HomeProduct/>
+    <!-- !最新专题 -->
+    <HomeSpecial/>
   </div>
 </template>
 
