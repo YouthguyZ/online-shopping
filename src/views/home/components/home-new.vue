@@ -3,21 +3,22 @@
     <template #right>
       <XtxMore />
     </template>
-
-    <ul class="goods-list" v-if="home.NewList.length">
-      <li v-for="item in home.NewList" :key="item.id">
-        <RouterLink to="/">
-          <!-- 图片懒加载 ：src => v-lazy -->
-          <img
-            v-lazy="item.picture"
-            alt=""
-          />
-          <p class="name ellipsis">{{item.name}}</p>
-          <p class="price">&yen;{{item.price}}</p>
-        </RouterLink>
-      </li>
-    </ul>
-    <HomeSkeleton v-else :count="4"/>
+    <transition name="fade">
+      <ul class="goods-list" v-if="home.NewList.length">
+        <li v-for="item in home.NewList" :key="item.id">
+          <RouterLink to="/">
+            <!-- 图片懒加载 ：src => v-lazy -->
+            <img
+              v-lazy="item.picture"
+              alt=""
+            />
+            <p class="name ellipsis">{{item.name}}</p>
+            <p class="price">&yen;{{item.price}}</p>
+          </RouterLink>
+        </li>
+      </ul>
+      <HomeSkeleton v-else :count="4"/>
+    </transition>
   </homePannel>
 </template>
 

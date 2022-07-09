@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 // 导入请求 request
 import request from '@/utils/request'
-import { ApiRes, HomeItem, HotItem, NewItem } from '@/types'
+import { ApiRes, BrandItem, HomeItem, HotItem, NewItem } from '@/types'
 
 export default defineStore('home',{
   state:()=>{
@@ -9,7 +9,8 @@ export default defineStore('home',{
       // 类型断言
       bannerList:[] as HomeItem[],
       NewList:[] as NewItem[],
-      hotList:[] as HotItem[]
+      hotList:[] as HotItem[],
+      brandList:[] as BrandItem[]
     }
   },
   actions:{
@@ -27,6 +28,12 @@ export default defineStore('home',{
     const res =await request.get<ApiRes<HotItem[]>>('/home/hot')
     // console.log(res.data.result);
     this.hotList=res.data.result
+   },
+   async getBrandList(){
+    const res =await request.get<ApiRes<BrandItem[]>>('/home/brand')
+    // console.log(res.data.result);
+    this.brandList=res.data.result
    }
+   
   }
 })
