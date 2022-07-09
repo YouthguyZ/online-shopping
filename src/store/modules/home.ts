@@ -32,7 +32,8 @@ export default defineStore('home',{
    async getBrandList(){
     const res =await request.get<ApiRes<BrandItem[]>>('/home/brand')
     // console.log(res.data.result);
-    this.brandList=res.data.result
+    this.brandList=[...res.data.result,...res.data.result,...res.data.result,]
+    this.brandList.pop()
    }
    
   }
