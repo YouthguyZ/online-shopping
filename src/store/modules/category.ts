@@ -33,7 +33,7 @@ export default defineStore('category',{
   actions:{
    async getAllCategory(){
       const res=await request.get<ApiRes<categoryItem[]>>('/home/category/head')
-      console.log(res.data.result);
+      // console.log(res.data.result);
       // 给 list 增加 open 属性
       res.data.result.forEach(item=>item.open=false)
       this.list=res.data.result

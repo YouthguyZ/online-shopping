@@ -5,6 +5,12 @@ import HomePannel from './components/home-pannel.vue'
 import HomeNew from './components/home-new.vue';
 import HomeHot from './components/home-hot.vue';
 
+// 优化再首页里面发获取分类请求
+ import useStore from '@/store';
+  const {category}=useStore()
+  // 获取全部分类列表
+  category.getAllCategory()
+
 </script>
 
 <template>

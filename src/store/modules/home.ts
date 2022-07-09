@@ -15,17 +15,17 @@ export default defineStore('home',{
   actions:{
    async getBannerList(){
     const res =await request.get<ApiRes<HomeItem[]>>('/home/banner')
-    console.log(res.data.result);
+    // console.log(res.data.result);
     this.bannerList=res.data.result
    },
    async getNewList(){
     const res =await request.get<ApiRes<NewItem[]>>('/home/new')
-    console.log(res.data.result);
+    // console.log(res.data.result);
     this.NewList=res.data.result
    },
    async getHotList(){
     const res =await request.get<ApiRes<HotItem[]>>('/home/hot')
-    console.log(res.data.result);
+    // console.log(res.data.result);
     this.hotList=res.data.result
    }
   }

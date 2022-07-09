@@ -34,7 +34,7 @@
   import useStore from '@/store';
   const {category}=useStore()
   // 获取全部分类列表
-  category.getAllCategory()
+  // category.getAllCategory()
 </script>
 
 <style scoped lang="less">
