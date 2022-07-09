@@ -6,9 +6,9 @@
       :key="i"
       :style="{ backgroundColor: '#f0f9f4' }"
     >
-      <XtxSkeleton bg="#e4e4e4" :width="306" :height="306" />
-      <XtxSkeleton bg="#e4e4e4" :width="160" :height="24" />
-      <XtxSkeleton bg="#e4e4e4" :width="120" :height="24" />
+      <XtxSkeleton animated bg="#e4e4e4" :width="306" :height="306" />
+      <XtxSkeleton animated bg="#e4e4e4" :width="160" :height="24" />
+      <XtxSkeleton animated bg="#e4e4e4" :width="120" :height="24" />
     </div>
   </div>
 </template>

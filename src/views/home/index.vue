@@ -6,8 +6,9 @@ import HomeNew from './components/home-new.vue';
 import HomeHot from './components/home-hot.vue';
 
 // 优化再首页里面发获取分类请求
- import useStore from '@/store';
+import useStore from '@/store';
 import HomeBrand from './components/home-brand.vue';
+import HomeProduct from './components/home-product.vue';
   const {category}=useStore()
   // 获取全部分类列表
   category.getAllCategory()
@@ -30,6 +31,8 @@ import HomeBrand from './components/home-brand.vue';
     <HomeHot/>
     <!-- !热门品牌 -->
     <HomeBrand/>
+    <!-- !商品区别 -->
+    <HomeProduct/>
   </div>
 </template>
 

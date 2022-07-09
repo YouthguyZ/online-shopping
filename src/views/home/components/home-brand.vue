@@ -3,10 +3,17 @@ import homePannel from './home-pannel.vue';
 // 获取数据
 import useStore from '@/store';
 import { computed, ref } from 'vue';
+import { useLazyData } from '@/utils/hooks';
 const {home}=useStore()
-home.getBrandList()
+// home.getBrandList()
 // 数据懒加载
-
+// const target=ref(null)
+// 原始封装
+// useLazyData(target,()=>{
+//   home.getBrandList()
+// })
+// 借助引用数据类型的特性实现封装
+const target = useLazyData(() => home.getBrandList())
 const index = ref(0)
 
 // 计算出热门品牌一共多少页
@@ -14,7 +21,7 @@ const maxPage = computed(() => Math.ceil(home.brandList.length / 5))
 </script>
 
 <template>
-  <homePannel title="热门品牌" sub-title="国际经典 品质保证">
+  <homePannel ref="target" title="热门品牌" sub-title="国际经典 品质保证">
     <template v-slot:right>
       <a href="javascript:;" :class="{disabled:index===0}" @click="index>0 && index--" class="iconfont icon-angle-left prev"></a>
       <a href="javascript:;" :class="{disabled:index === maxPage - 1 }" @click="index < maxPage - 1 && index++" class="iconfont icon-angle-right next"></a>

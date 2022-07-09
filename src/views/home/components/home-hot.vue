@@ -5,11 +5,12 @@ import HomePannel from './home-pannel.vue'
 // import {useIntersectionObserver} from '@vueuse/core'
 import { ref } from 'vue';
 import { useLazyData } from '@/utils/hooks';
+import HomeSkeleton from './home-skeleton.vue';
 const { home } = useStore()
 // home.getHotList()
 // 实现数据懒加载
 // 在进入可视区后才发请求
-const target =ref(null)
+// const target =ref(null)
 // const {stop}=useIntersectionObserver(target,([{isIntersecting}])=>{
 //   // 判断是否进入可视区
 //   if(isIntersecting){
@@ -22,12 +23,12 @@ const target =ref(null)
 
 
 // 原始封装
-useLazyData(target,()=>{
-  home.getHotList()
-})
+// useLazyData(target,()=>{
+//   home.getHotList()
+// })
 
 // 借助引用数据类型的特性实现封装
-// const target = useLazyData(() => home.getNewList())
+const target = useLazyData(() => home.getHotList())
 
 // 极致精简 => 将 api 函数直接作为回调传入, 自动执行
 // const target = useLazyData(home.getNewList)
@@ -35,7 +36,8 @@ useLazyData(target,()=>{
 </script>
 <template>
  <HomePannel ref="target" title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul ref="pannel" class="goods-list">
+  <transition name="fade">
+    <ul ref="pannel" class="goods-list" v-if="home.hotList.length">
       <li v-for="item in home.hotList" :key="item.id">
         <RouterLink to="/">
           <!-- <img :src="item.picture" alt="" /> -->
@@ -46,6 +48,8 @@ useLazyData(target,()=>{
         </RouterLink>
       </li>
     </ul>
+    <HomeSkeleton :count="4" v-else/>
+  </transition>
   </HomePannel>
 </template>
 
