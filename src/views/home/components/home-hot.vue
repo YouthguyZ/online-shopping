@@ -2,7 +2,7 @@
 import useStore from '@/store'
 import HomePannel from './home-pannel.vue'
 
-import {useIntersectionObserver} from '@vueuse/core'
+// import {useIntersectionObserver} from '@vueuse/core'
 import { ref } from 'vue';
 import { useLazyData } from '@/utils/hooks';
 const { home } = useStore()

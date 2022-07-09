@@ -4,7 +4,7 @@
       <XtxMore />
     </template>
 
-    <ul class="goods-list">
+    <ul class="goods-list" v-if="home.NewList.length">
       <li v-for="item in home.NewList" :key="item.id">
         <RouterLink to="/">
           <!-- 图片懒加载 ：src => v-lazy -->
@@ -17,6 +17,7 @@
         </RouterLink>
       </li>
     </ul>
+    <HomeSkeleton v-else :count="4"/>
   </homePannel>
 </template>
 
@@ -25,6 +26,7 @@ import homePannel from './home-pannel.vue';
 import useStore from '@/store';
 import { ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
+import HomeSkeleton from './home-skeleton.vue';
 const {home} =useStore()
 // home.getNewList()
 // 实现数据懒加载
@@ -65,4 +67,5 @@ const {stop}=useIntersectionObserver(target,([{isIntersecting}])=>{
     }
   }
 }
+
 </style>
