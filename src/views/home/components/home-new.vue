@@ -1,5 +1,5 @@
 <template>
-  <homePannel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
+  <homePannel ref="target" title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
     <template #right>
       <XtxMore />
     </template>
@@ -23,8 +23,22 @@
 <script setup lang="ts">
 import homePannel from './home-pannel.vue';
 import useStore from '@/store';
+import { ref } from 'vue';
+import { useIntersectionObserver } from '@vueuse/core';
 const {home} =useStore()
-home.getNewList()
+// home.getNewList()
+// 实现数据懒加载
+// 在进入可视区后才发请求
+const target =ref(null)
+const {stop}=useIntersectionObserver(target,([{isIntersecting}])=>{
+  // 判断是否进入可视区
+  if(isIntersecting){
+    home.getNewList()
+    // 请求过后就不用再发请求 优化性能
+    // 解构出 stop
+    stop()
+  }
+})
 </script>
 
 <style scoped lang="less">

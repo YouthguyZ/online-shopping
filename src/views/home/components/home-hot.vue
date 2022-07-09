@@ -1,11 +1,26 @@
 <script lang="ts" setup>
 import useStore from '@/store'
 import HomePannel from './home-pannel.vue'
+
+import {useIntersectionObserver} from '@vueuse/core'
+import { ref } from 'vue';
 const { home } = useStore()
-home.getHotList()
+// home.getHotList()
+// 实现数据懒加载
+// 在进入可视区后才发请求
+const target =ref(null)
+const {stop}=useIntersectionObserver(target,([{isIntersecting}])=>{
+  // 判断是否进入可视区
+  if(isIntersecting){
+    home.getHotList()
+    // 请求过后就不用再发请求 优化性能
+    // 解构出 stop
+    stop()
+  }
+})
 </script>
 <template>
- <HomePannel title="人气推荐" sub-title="人气爆款 不容错过">
+ <HomePannel ref="target" title="人气推荐" sub-title="人气爆款 不容错过">
     <ul ref="pannel" class="goods-list">
       <li v-for="item in home.hotList" :key="item.id">
         <RouterLink to="/">
