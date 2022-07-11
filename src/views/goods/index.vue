@@ -1,13 +1,25 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useStore from '@/store';
+import { storeToRefs } from 'pinia';
+import { watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
+const route=useRoute()
+const {goods}=useStore()
+watchEffect(()=>{
+  if(route.fullPath!=='/goods/'+route.params.id)return
+  goods.getGoodsInfo(route.params.id as string)
+})
+const { info } = storeToRefs(goods)
+</script>
 <template>
   <div class="xtx-goods-page">
     <div class="container">
       <!-- 面包屑 -->
-      <XtxBread>
+      <XtxBread v-if="info.categories">
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem to="/">手机</XtxBreadItem>
-        <XtxBreadItem to="/">华为</XtxBreadItem>
-        <XtxBreadItem to="/">p30</XtxBreadItem>
+        <XtxBreadItem :to="`/goods/${info.categories[0]}}}`">{{info.categories[1].name}}</XtxBreadItem>
+        <XtxBreadItem :to="`/goods/${info.categories[1]}}`">{{info.categories[0].name}}</XtxBreadItem>
+        <XtxBreadItem >{{info.name}}</XtxBreadItem>
       </XtxBread>
       <!-- 商品信息 -->
       <div class="goods-info"></div>
