@@ -22,6 +22,12 @@ const router= createRouter({
   },
   {path:'/login',component:()=>import('@/views/Login/index.vue')}
   ],
-  history:createWebHashHistory()
+  history:createWebHashHistory(),
+  // 优化跳转 点击首页 直接回到首页顶部
+  scrollBehavior:()=>{
+    return {
+      top:0
+    }
+  }
 })
 export default router

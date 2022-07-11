@@ -3,7 +3,7 @@
       <li class="home"><RouterLink to="/">首页</RouterLink></li>
       <!-- 点击跳转 -->
       <li 
-      @mouseenter="category.show(item.id)"
+      @mousemove="category.show(item.id)"
       @mouseleave="category.hide(item.id)"
        
       v-for="item in category.list" 
