@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 // 导入请求 request
 import request from '@/utils/request'
 // 导入类型声明
-import { ApiRes, categoryItem, TopCategory } from '@/types'
+import { ApiRes, categoryItem, SubCategory, TopCategory } from '@/types'
 
 // 优化首页加载
 import { topCategory } from '../contansts'
@@ -28,7 +28,8 @@ export default defineStore('category',{
     return {
       // 类型断言
       list:defaultCategory as categoryItem[],
-      topCategory:{} as TopCategory
+      topCategory:{} as TopCategory,
+      subCategory:{} as SubCategory
     }
   },
   actions:{
@@ -61,12 +62,18 @@ export default defineStore('category',{
       item!.open=false
     },
     async getTopCategory(id:string){
-      const res= await request.get('/category',{
+      const res= await request.get<ApiRes<TopCategory>>('/category',{
         params:{id}
       })
       // console.log(res.data.result);
       this.topCategory=res.data.result
-
+    },
+    async getSubFilter(id:string){
+      const res= await request.get<ApiRes<SubCategory>>('/category/sub/filter',{
+        params:{id}
+      })
+      // console.log(res.data.result);
+      this.subCategory=res.data.result
     }
   }
 })

@@ -52,6 +52,7 @@ import { storeToRefs } from 'pinia';
 import { watch, watchEffect } from 'vue';
 import GoodsItem from './components/goods-item.vue';
 import { useRoute } from 'vue-router';
+import router from '@/router';
 const {category,home} =useStore()
 // 获取 id 使用 useroute
 const route=useRoute()
@@ -74,6 +75,7 @@ const route=useRoute()
 // 优化
 watchEffect(()=>{
   if(!route.params.id) return
+  if(route.fullPath!=='/category/'+route.params.id)return
   category.getTopCategory(route.params.id as string)
 })
 
