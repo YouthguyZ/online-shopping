@@ -18,8 +18,8 @@ const { info } = storeToRefs(goods)
       <!-- 面包屑 -->
       <XtxBread v-if="info.categories">
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem :to="`/goods/${info.categories[0]}}}`">{{info.categories[1].name}}</XtxBreadItem>
-        <XtxBreadItem :to="`/goods/${info.categories[1]}}`">{{info.categories[0].name}}</XtxBreadItem>
+        <XtxBreadItem :to="`/category/${info.categories[1].id}`">{{info.categories[1].name}}</XtxBreadItem>
+        <XtxBreadItem :to="`/category/sub/${info.categories[0].id}`">{{info.categories[0].name}}</XtxBreadItem>
         <XtxBreadItem >{{info.name}}</XtxBreadItem>
       </XtxBread>
       <!-- 商品信息 -->
