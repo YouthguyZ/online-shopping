@@ -17,7 +17,9 @@ const router= createRouter({
       },
       {path:'/category/sub/:id', 
       component:()=>import('@/views/category/sub.vue') // 路由懒加载 二级分类
-    },
+      },{path:'/goods/:id', 
+      component:()=>import('@/views/goods/index.vue') 
+      },
     ]
   },
   {path:'/login',component:()=>import('@/views/Login/index.vue')}

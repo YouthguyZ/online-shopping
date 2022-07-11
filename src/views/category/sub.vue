@@ -2,6 +2,7 @@
 import useStore from '@/store';
 import { watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
+import goodsItem from './components/goods-item.vue';
 const route =useRoute()
 const {category} =useStore()
 console.log(route);
@@ -57,6 +58,29 @@ watchEffect(()=>{
             </div>
           </div>
         </div>
+        <!-- 商品区域 -->
+        <div class="goods-list">
+          <!-- 排序区域 -->
+          <div class="sub-sort">
+            <div class="sort">
+              <a href="javascript:;" class="active">默认排序</a>
+              <a href="javascript:;">最新商品</a>
+              <a href="javascript:;">最高人气</a>
+              <a href="javascript:;">评论最多</a>
+              <a href="javascript:;">
+                价格排序
+                <i class="arrow up" />
+                <i class="arrow down" />
+              </a>
+            </div>
+          </div>
+          <!-- 商品列表 -->
+          <ul>
+            <li v-for="goods in category.subCategory.goods" :key="goods.id">
+              <goodsItem :goods="goods"/>
+            </li>
+          </ul>
+        </div>
     </div>
   </div>
 </template>
@@ -84,6 +108,74 @@ watchEffect(()=>{
         &:hover {
           color: @xtxColor;
         }
+      }
+    }
+  }
+}
+
+.goods-list {
+  background: #fff;
+  padding: 0 25px;
+  margin-top: 25px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    li {
+      margin-right: 20px;
+      margin-bottom: 20px;
+      &:nth-child(5n) {
+        margin-right: 0;
+      }
+    }
+  }
+  .sub-sort {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .sort {
+      display: flex;
+      a {
+        height: 30px;
+        line-height: 28px;
+        border: 1px solid #e4e4e4;
+        padding: 0 20px;
+        margin-right: 20px;
+        color: #999;
+        border-radius: 2px;
+        position: relative;
+        transition: all 0.3s;
+        &.active {
+          background: @xtxColor;
+          border-color: @xtxColor;
+          color: #fff;
+        }
+        .arrow {
+          position: absolute;
+          border: 5px solid transparent;
+          right: 8px;
+          &.up {
+            top: 3px;
+            border-bottom-color: #bbb;
+            &.active {
+              border-bottom-color: @xtxColor;
+            }
+          }
+          &.down {
+            top: 15px;
+            border-top-color: #bbb;
+            &.active {
+              border-top-color: @xtxColor;
+            }
+          }
+        }
+      }
+    }
+    .check {
+      .xtx-checkbox {
+        margin-left: 20px;
+        color: #999;
       }
     }
   }
