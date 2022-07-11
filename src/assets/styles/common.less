@@ -266,3 +266,35 @@ ul {
 //     opacity: 0;
 //   }
 // }
+
+// 离开淡出 + 进入淡入
+.fade-in-out {
+  &-leave {
+    &-from {
+      opacity: 1;
+    }
+    &-active {
+      position: absolute;
+      width: 100%;
+      transition: opacity 0.5s 0.2s;
+      z-index: 1;
+    }
+    &-to {
+      opacity: 0;
+    }
+  }
+  &-enter {
+    &-from {
+      opacity: 0;
+    }
+    &-active {
+      position: absolute;
+      width: 100%;
+      transition: opacity 0.5s 0.2s;
+      z-index: 1;
+    }
+    &-to {
+      opacity: 1;
+    }
+  }
+}

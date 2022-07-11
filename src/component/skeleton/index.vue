@@ -20,6 +20,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+   opacity: {
+    type: String,
+    default: '1'
+  }
 })
 </script>
 <template>
@@ -29,7 +33,7 @@ defineProps({
     :class="{ shan: animated, fade: fade }"
   >
     <!-- 1 盒子-->
-    <div class="block" :style="{ backgroundColor: bg }"></div>
+    <div class="block" :style="{ backgroundColor: bg ,opacity }"></div>
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
 </template>

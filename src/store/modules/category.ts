@@ -69,11 +69,16 @@ export default defineStore('category',{
       this.topCategory=res.data.result
     },
     async getSubFilter(id:string){
+      console.log(2234);
+      
       const res= await request.get<ApiRes<SubCategory>>('/category/sub/filter',{
         params:{id}
       })
       // console.log(res.data.result);
       this.subCategory=res.data.result
+    },
+    resetSubCategory() {
+      this.subCategory = {} as SubCategory
     }
   }
 })
