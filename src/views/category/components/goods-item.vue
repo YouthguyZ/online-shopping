@@ -1,16 +1,22 @@
 <template>
   <RouterLink to="/" class="goods-item">
     <img
-      src="https://yanxuan-item.nosdn.127.net/46898c7fa475dbfc89dac2f7e7c2c16f.jpg"
+      v-lazy="goods.picture"
       alt=""
     />
-    <p class="name ellipsis">红功夫 麻辣小龙虾 19.99/500g 实惠到家</p>
-    <p class="desc ellipsis">火锅食材</p>
-    <p class="price">&yen;19.99</p>
+    <p class="name ellipsis">{{goods.name}}</p>
+    <p class="desc ellipsis">{{goods.desc}}</p>
+    <p class="price">&yen;{{goods.price}}</p>
   </RouterLink>
 </template>
 
-<script lang="ts" setup name="GoodsItem"></script>
+<script lang="ts" setup name="GoodsItem">
+import { GoodsItem } from '@/types';
+// 接受传值
+defineProps<{
+  goods:GoodsItem
+}>()
+</script>
 
 <style scoped lang="less">
 .goods-item {

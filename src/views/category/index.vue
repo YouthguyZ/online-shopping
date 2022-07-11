@@ -18,14 +18,14 @@
       </ul>
     </div>
     <!-- 分类关联商品 -->
-    <div class="ref-goods">
+    <div class="ref-goods" v-for="item in topCategory.children">
       <div class="head">
-        <h3>- 海鲜 -</h3>
+        <h3>- {{item.name}} -</h3>
         <p class="tag">温暖柔软，品质之选</p>
         <XtxMore />
       </div>
       <div class="body">
-        <GoodsItem v-for="i in 5" :key="i" />
+        <GoodsItem v-for="sub in item.goods" :key="item.id" :goods="sub"/>
       </div>
     </div>
   </div>
