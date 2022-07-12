@@ -164,14 +164,17 @@ export type GoodsInfo = {
     id: string
     name: string
   }[]
-  specs:Spec[]
+  specs:SpecItem[]
 }
 // 商品的规格类型
-export type Spec = {
+export type SpecItem = {
   name: string
-  values: {
-    desc: string
-    name: string
-    picture: string
-  }[]
+  values: ValueItem[]
+}
+
+export type ValueItem = {
+  desc: string
+  name: string
+  picture: string
+  selected: boolean
 }

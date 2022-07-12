@@ -1,10 +1,19 @@
 <script setup lang="ts" name="GoodsSku">
-import { GoodsInfo } from '@/types';
+import { GoodsInfo, SpecItem, ValueItem } from '@/types';
 
 // 接收父组件传值
 defineProps<{
   goods:GoodsInfo
 }>()
+// sub 是当前点击的条目
+// item 是当前点击的条目所属的规格
+const changeSelected = (sub: ValueItem, item: SpecItem) => {
+  // 干掉所有人
+  item.values.forEach(i => i.selected = false)
+  // 修改当前被点击的对象属性 selected 取反
+  // selected 默认是 undefined 而 undefined 取反正好是 true
+  sub.selected = !sub.selected
+}
 </script>
 <template>
   <div class="goods-sku">
@@ -14,12 +23,13 @@ defineProps<{
         <template v-for="sub in item.values" :key="sub.name">
           <img
             v-if="sub.picture"
-            class="selected"
+            :class="{ selected: sub.selected }"
             :src="sub.picture"
             :alt="sub.name"
             :title="sub.name"
+             @click="changeSelected(sub, item)"
           />
-          <span v-else>{{sub.name}}</span>
+          <span  @click="changeSelected(sub, item)" :class="{ selected: sub.selected }" v-else>{{sub.name}}</span>
         </template>
       </dd>
     </dl>
