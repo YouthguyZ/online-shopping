@@ -1,9 +1,13 @@
 <script lang="ts" setup name="XtxCity">
 import  Axios  from 'axios';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+import {onClickOutside} from '@vueuse/core'
 const active=ref(false)
+const target=ref(null)
 
   const cityList =ref<AreaList[]>([])
+  // 在定义一个数据接收
+  const cacheList =ref<AreaList[]>([])
 // 城市列表类型
 type AreaList = {
   code: string
@@ -17,18 +21,35 @@ async function getCityList(){
   const res =await Axios.get<AreaList[]>('https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/area.json')
   console.log(res.data);
   cityList.value=res.data
+  // 接收相同数据
+  cacheList.value=res.data
 }
 getCityList()
+// 点击 target 以外的地区会关闭
+onClickOutside(target,()=>{
+  active.value=false
+})
+
+// 定义点击事件
+const selectCity=(city:AreaList)=>{
+  // 如果没有地区信息内容 就中断执行并关闭弹框
+  if(!city.areaList) return active.value=false
+  cityList.value=city.areaList
+}
+// 侦听器 弹框关闭后重新赋原始地区值给 citylist （恢复数据）
+watchEffect(() => {
+  if (!active.value) cityList.value = cacheList.value
+})
 </script>
 <template>
-  <div class="xtx-city">
+  <div ref="target" class="xtx-city">
     <div @click="active=!active" :class="{active:active}" class="select">
       <span class="placeholder">请选择配送地址</span>
       <span class="value"></span>
       <i class="iconfont icon-angle-down"></i>
     </div>
     <div v-show="active" class="option">
-      <span class="ellipsis" v-for="item in cityList" :key="item.code">{{item.name}}</span>
+      <span @click="selectCity(item)" class="ellipsis" v-for="item in cityList" :key="item.code">{{item.name}}</span>
     </div>
   </div>
 </template>
