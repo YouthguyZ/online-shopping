@@ -8,6 +8,8 @@ import XtxMore from '@/component/more/index.vue'
 // 导入全局组件 面包屑
 import XtxBread from '@/component/bread/index.vue'
 import XtxBreadItem from '@/component/bread/item.vue'
+// 导入全局组件 城市地址
+import XtxCity from '@/component/city/index.vue'
 
 // 导入默认加载失败图片
 import defaultImg from "@/assets/images/200.png";
@@ -23,6 +25,7 @@ export default {
     app.component(XtxMore.name, XtxMore)
     app.component(XtxBread.name, XtxBread)
     app.component(XtxBreadItem.name, XtxBreadItem)
+    app.component(XtxCity.name, XtxCity)
 
     // 全局注册指令
     // 参数1: 指令名

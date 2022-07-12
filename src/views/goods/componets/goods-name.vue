@@ -1,5 +1,6 @@
 <script lang="ts" setup name="GoodName">
 import { GoodsInfo } from '@/types';
+import City from '@/component/city/index.vue';
 
 defineProps<{
   goods:GoodsInfo
@@ -19,7 +20,7 @@ defineProps<{
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至</dd>
+      <dd>至<City style="margin-left: 8px;"/></dd>
     </dl>
     <dl>
       <dt>服务</dt>
