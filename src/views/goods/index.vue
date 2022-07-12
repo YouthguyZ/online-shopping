@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router';
 import GoodsImage from './componets/goods-image.vue';
 import GoodsSales from './componets/goods-sales.vue';
 import GoodsName from './componets/goods-name.vue';
+import GoodsSku from './componets/goods-sku.vue';
 const route=useRoute()
 const {goods}=useStore()
 watchEffect(()=>{
@@ -33,6 +34,7 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName :goods="info"/>
+          <GoodsSku :goods="info"/>
         </div>
       </div>
       <!-- 商品详情 -->
