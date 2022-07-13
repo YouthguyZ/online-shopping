@@ -38,7 +38,7 @@ const emit=defineEmits<{
 // 获取地址数据
 async function getCityList(){
   const res =await Axios.get<AreaList[]>('https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/area.json')
-  console.log(res.data);
+  // console.log(res.data);
   cityList.value=res.data
   // 接收相同数据
   cacheList.value=res.data

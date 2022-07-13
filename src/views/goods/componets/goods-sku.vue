@@ -1,8 +1,9 @@
 <script setup lang="ts" name="GoodsSku">
 import { GoodsInfo, SpecItem, ValueItem } from '@/types';
+import bwPowerSet from '@/utils/bwSet';
 
 // 接收父组件传值
-defineProps<{
+const props=defineProps<{
   goods:GoodsInfo
 }>()
 // sub 是当前点击的条目
@@ -14,6 +15,46 @@ const changeSelected = (sub: ValueItem, item: SpecItem) => {
   // selected 默认是 undefined 而 undefined 取反正好是 true
   sub.selected = !sub.selected
 }
+// 目标: 生成路径字典(对象/映射) => 传入一个 庆友黄+中国 => 有货
+// obj['中国+10cm']
+// obj['中国', '10cm'] 无法取值, 需要拼接
+function getPathMap() {
+  // 1. 筛选无效的数据 (没有库存的)
+  const skus = props.goods.skus.filter(item => item.inventory > 0)
+  // console.log(skus)
+  // 创建一个路径字典
+  const pathMap: any = {}
+  skus.forEach(item => {
+    // 2. 将 skus 转成字符串数组 (都是有货的 sku)
+    // 算法要的是字符串数组 => 我们就将对象数组转成字符串数组
+    // valueName
+    const arr = item.specs.map(v => v.valueName)
+    // console.log(arr)
+    // 3. 调用算法生成子集
+    const result = bwPowerSet(arr)
+    // console.log(result)
+    // 4. 往路径字典对象中添加属性
+    result.forEach(arrItem => {
+      // console.log(arrItem.join('☆'))
+      const key = arrItem.join('☆')
+      // pathMap[key] = true
+      // 'xxx' in 对象 作用是判断 'xxx' 是否是对象的属性, 有就返回 true, 没有就是 false
+      if (key in pathMap) {
+        // 4.2 如果对象中有这个属性, 就直接添加 id 到数组
+        pathMap[key].push(item.id)
+      } else {
+        // 4.1 如果对象中没有这个属性, 就创建一个数组, 添加 id
+        // const arr = [1, 2, 3, 4, item.id]
+        pathMap[key] = [item.id]
+        // pathMap[key].push(item.id)
+      }
+    })
+  })
+  return pathMap
+}
+
+const pathMap = getPathMap()
+console.log(pathMap)
 </script>
 <template>
   <div class="goods-sku">

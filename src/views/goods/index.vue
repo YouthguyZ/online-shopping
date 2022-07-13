@@ -34,7 +34,7 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName :goods="info"/>
-          <GoodsSku :goods="info"/>
+          <GoodsSku v-if="info.id" :goods="info"/>
         </div>
       </div>
       <!-- 商品详情 -->
