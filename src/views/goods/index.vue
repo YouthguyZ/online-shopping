@@ -37,7 +37,7 @@ const count=ref(2)
         <div class="spec">
           <GoodsName :goods="info"/>
           <GoodsSku v-if="info.id" :goods="info"/>
-          <XtxNumbox v-model="count"/>
+          <XtxNumbox showLabel v-model="count" :min="1" :max="10"/>
         </div>
       </div>
       <!-- 商品详情 -->

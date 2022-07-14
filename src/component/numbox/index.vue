@@ -1,16 +1,33 @@
 <script lang="ts" setup name="XtxNumbox">
 // 接收父组件传值
-defineProps<{
+const props=defineProps<{
   modelValue:number
+  min:number
+  max:number
+  showLabel?:boolean
 }>()
+const emit=defineEmits<{
+  (e:'update:modelValue',val:number):void
+  
+}>()
+const sub=()=>{
+  // 判断
+  if(props.modelValue<=props.min)return
+  emit('update:modelValue',props.modelValue-1)
+}
+const add=()=>{
+  if(props.modelValue>=props.max)return
+  emit('update:modelValue',props.modelValue+1)
+  
+}
 </script>
 <template>
   <div class="xtx-numbox">
-    <div class="label">数量</div>
+    <div class="label" v-if="showLabel">数量</div>
     <div class="numbox">
-      <a href="javascript:;">-</a>
+      <a href="javascript:;" @click="sub">-</a>
       <input type="text" readonly :value="modelValue" />
-      <a href="javascript:;">+</a>
+      <a href="javascript:;" @click="add">+</a>
     </div>
   </div>
 </template>
