@@ -38,6 +38,7 @@ const count=ref(2)
           <GoodsName :goods="info"/>
           <GoodsSku v-if="info.id" :goods="info"/>
           <XtxNumbox showLabel v-model="count" :min="1" :max="10"/>
+          <XtxButton type="primary" style="margin-top: 20px;">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品详情 -->

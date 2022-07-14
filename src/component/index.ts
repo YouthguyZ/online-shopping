@@ -16,6 +16,9 @@ import defaultImg from "@/assets/images/200.png";
 
 // 导入数量组件
 import XtxNumbox from '@/component/numbox/index.vue'
+// 导入全局按钮组件
+import XtxButton from '@/component/button/index.vue'
+
 
 
 import { App } from 'vue'
@@ -31,6 +34,7 @@ export default {
     app.component(XtxBreadItem.name, XtxBreadItem)
     app.component(XtxCity.name, XtxCity)
     app.component(XtxNumbox.name, XtxNumbox)
+    app.component(XtxButton.name, XtxButton)
 
     // 全局注册指令
     // 参数1: 指令名
