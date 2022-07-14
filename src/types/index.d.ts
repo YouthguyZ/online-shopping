@@ -178,6 +178,7 @@ export type ValueItem = {
   name: string
   picture: string
   selected: boolean
+  disabled:boolean
 }
 
 export type SkuItem = {
