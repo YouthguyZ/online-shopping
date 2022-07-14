@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import useStore from '@/store';
 import { storeToRefs } from 'pinia';
-import { watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import GoodsImage from './componets/goods-image.vue';
 import GoodsSales from './componets/goods-sales.vue';
@@ -14,6 +14,8 @@ watchEffect(()=>{
   goods.getGoodsInfo(route.params.id as string)
 })
 const { info } = storeToRefs(goods)
+// 数量
+const count=ref(2)
 </script>
 <template>
   <div class="xtx-goods-page">
@@ -35,6 +37,7 @@ const { info } = storeToRefs(goods)
         <div class="spec">
           <GoodsName :goods="info"/>
           <GoodsSku v-if="info.id" :goods="info"/>
+          <XtxNumbox v-model="count"/>
         </div>
       </div>
       <!-- 商品详情 -->

@@ -14,6 +14,10 @@ import XtxCity from '@/component/city/index.vue'
 // 导入默认加载失败图片
 import defaultImg from "@/assets/images/200.png";
 
+// 导入数量组件
+import XtxNumbox from '@/component/numbox/index.vue'
+
+
 import { App } from 'vue'
 // 图片懒加载：等图片正式进入到可视区中时，才加载对应的图片，否则不请求图片
 // 通过vueuse封装的 useIntersectionObserver 可监视图片何时进入或离开可视区
@@ -26,6 +30,7 @@ export default {
     app.component(XtxBread.name, XtxBread)
     app.component(XtxBreadItem.name, XtxBreadItem)
     app.component(XtxCity.name, XtxCity)
+    app.component(XtxNumbox.name, XtxNumbox)
 
     // 全局注册指令
     // 参数1: 指令名
